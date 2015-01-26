@@ -11,3 +11,8 @@ http://blog.gitter.im/long-live-irc/
 
 
 https://developer.gitter.im/docs/welcome
+https://github.com/gitterHQ/docs
+
+https://github.com/gitterHQ/gitter-node-stream
+
+https://play.google.com/store/apps/details?id=im.gitter.gitter&hl=en_GB
