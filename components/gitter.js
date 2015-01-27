@@ -1472,6 +1472,7 @@ ircAccount.prototype = {
   // When the user clicks "Disconnect" in account manager, or uses /quit.
   // aMessage is an optional parameter containing the quit message.
   disconnect: function(aMessage) {
+    aMessage = Services.prefs.getCharPref("chat.irc.defaultQuitMessage");
     if (this.disconnected || this.disconnecting)
       return;
 
@@ -1784,7 +1785,7 @@ ircAccount.prototype = {
   }
 };
 
-function ircProtocol() {
+function gitterProtocol() {
   // ircCommands.jsm exports one variable: commands. Import this directly into
   // the protocol object.
   Cu.import("resource:///modules/ircCommands.jsm", this);
@@ -1830,7 +1831,7 @@ function ircProtocol() {
   ircHandlers.registerHandler(tempScope.ircSASL);
   ircHandlers.registerCAPHandler(tempScope.capSASL);
 }
-ircProtocol.prototype = {
+gitterProtocol.prototype = {
   __proto__: GenericProtocolPrototype,
   get name() "Gitter",
   get iconBaseURI() "chrome://prpl-gitter/skin/",
@@ -1843,12 +1844,9 @@ ircProtocol.prototype = {
   ],
 
   options: {
-    "serverPassword": {get label() "TOKEN", default: "", isPassword: true},
+    "serverPassword": {get label() "TOKEN", default: ""},
     // TODO We should attempt to auto-detect encoding instead.
     "encoding": {get label() _("options.encoding"), default: "UTF-8"},
-    "quitmsg": {get label() _("options.quitMessage"),
-                get default() Services.prefs.getCharPref("chat.irc.defaultQuitMessage")},
-    "partmsg": {get label() _("options.partMessage"), default: ""},
     "showServerTab": {get label() _("options.showServerTab"), default: false},
     "port": {get label() _("options.port"),  default: "6667",
                                    listValues: {"6667": "6667",
@@ -1863,4 +1861,4 @@ ircProtocol.prototype = {
   classID: Components.ID("{cdb62f40-a5da-11e4-bcd8-0800200c9a66}")
 };
 
-const NSGetFactory = XPCOMUtils.generateNSGetFactory([ircProtocol]);
+const NSGetFactory = XPCOMUtils.generateNSGetFactory([gitterProtocol]);
