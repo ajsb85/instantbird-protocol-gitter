@@ -1416,8 +1416,8 @@ ircAccount.prototype = {
     });
 
     // Load preferences.
-    this._port = this.getInt("port");
-    this._ssl = this.getBool("ssl");
+    this._port = parseInt(this.getString("port"));
+    this._ssl = true;
 
     // Use the display name as the user's real name.
     this._realname = this.imAccount.statusInfo.displayName;
@@ -1544,8 +1544,7 @@ ircAccount.prototype = {
   },
 
   chatRoomFields: {
-    "channel": {get label() _("joinChat.channel"), required: true},
-    "password": {get label() _("joinChat.password"), isPassword: true}
+    "channel": {get label() _("joinChat.channel"), required: true}
   },
 
   parseDefaultChatName: function(aDefaultName) {
@@ -1833,36 +1832,35 @@ function ircProtocol() {
 }
 ircProtocol.prototype = {
   __proto__: GenericProtocolPrototype,
-  get name() "IRC",
-  get iconBaseURI() "chrome://prpl-irc/skin/",
+  get name() "Gitter",
+  get iconBaseURI() "chrome://prpl-gitter/skin/",
   get usernameEmptyText() _("irc.usernameHint"),
-  get baseId() "prpl-irc",
+  get baseId() "prpl-gitter",
 
   usernameSplits: [
     {get label() _("options.server"), separator: "@",
-     defaultValue: "chat.freenode.net", reverse: true}
+     defaultValue: "irc.gitter.im", reverse: true}
   ],
 
   options: {
-    // TODO Default to IRC over SSL.
-    "port": {get label() _("options.port"), default: 6667},
-    "ssl": {get label() _("options.ssl"), default: false},
+    "serverPassword": {get label() "TOKEN", default: "", isPassword: true},
     // TODO We should attempt to auto-detect encoding instead.
     "encoding": {get label() _("options.encoding"), default: "UTF-8"},
     "quitmsg": {get label() _("options.quitMessage"),
                 get default() Services.prefs.getCharPref("chat.irc.defaultQuitMessage")},
     "partmsg": {get label() _("options.partMessage"), default: ""},
     "showServerTab": {get label() _("options.showServerTab"), default: false},
-    "alternateNicks": {get label() _("options.alternateNicks"), default: ""}
+    "port": {get label() _("options.port"),  default: "6667",
+                                   listValues: {"6667": "6667",
+                                                "6697": "6697"}},
   },
 
   get chatHasTopic() true,
   get slashCommandsNative() true,
-  //  Passwords in IRC are optional, and are needed for certain functionality.
-  get passwordOptional() true,
+  get noPassword() true,
 
   getAccount: function(aImAccount) new ircAccount(this, aImAccount),
-  classID: Components.ID("{607b2c0b-9504-483f-ad62-41de09238aec}")
+  classID: Components.ID("{cdb62f40-a5da-11e4-bcd8-0800200c9a66}")
 };
 
 const NSGetFactory = XPCOMUtils.generateNSGetFactory([ircProtocol]);
