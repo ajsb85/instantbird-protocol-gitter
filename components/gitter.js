@@ -293,7 +293,8 @@ ircChannel.prototype = {
 
     // If a valid message was given, use it as the part message.
     // Otherwise, fall back to the default part message, if it exists.
-    let msg = aMessage || this._account.getString("partmsg");
+    //let msg = aMessage || this._account.getString("partmsg");
+    let msg = "";
     if (msg)
       params.push(msg);
 
