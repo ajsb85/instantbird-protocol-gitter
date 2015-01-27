@@ -6,6 +6,8 @@
 		<em:name>Gitter Protocol</em:name>
 		<em:version>1.0</em:version>
     <em:type>2</em:type>
+    <em:strictCompatibility>true</em:strictCompatibility>
+    <em:multiprocessCompatible>true</em:multiprocessCompatible>
 		<em:description>Assists to setup a chat account for gitter.im</em:description>
 		<em:creator>Alexander Salas</em:creator>
 		<em:translator>Fatma Youssef</em:translator>
