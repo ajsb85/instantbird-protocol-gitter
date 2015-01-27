@@ -1,0 +1,8 @@
+skin    prpl-gitter         classic/1.0 chrome/skin/
+locale	prpl-gitter	en-US		chrome/locale/en-US/
+
+component {cdb62f40-a5da-11e4-bcd8-0800200c9a66} components/gitter.js
+contract @mozilla.org/chat/gitter;1 {cdb62f40-a5da-11e4-bcd8-0800200c9a66}
+category im-protocol-plugin prpl-gitter @mozilla.org/chat/gitter;1
+
+resource prpl-gitter modules/
