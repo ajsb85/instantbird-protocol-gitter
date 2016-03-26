@@ -1,4 +1,6 @@
 # Gitter.im Protocol
+
+[![Join the chat at https://gitter.im/ajsb85/instantbird-protocol-gitter](https://badges.gitter.im/ajsb85/instantbird-protocol-gitter.svg)](https://gitter.im/ajsb85/instantbird-protocol-gitter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Assists to setup a chat account for gitter.im
 
 Where developers come to talk.
